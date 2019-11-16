@@ -19,3 +19,14 @@ django-admin startapp user
 django-admin startapp produt
 django-admin startapp order
 ```
+### 2. Model 설정
+```
+각 APP의 model class 생성 후
+1. settings에 app 등록
+2. python manage.py makemigrations
+3. python manage.py migrate
+```
+### 3. Admin 구성 후 관리자 계정 생성
+```
+python manage.py createsuperuser
+```
