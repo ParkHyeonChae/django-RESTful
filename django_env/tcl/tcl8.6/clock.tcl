@@ -2565,7 +2565,7 @@ proc ::tcl::clock::FormatNumericTimeZone { z } {
 #	None.
 #
 # Jeff Hobbs put this in to support an atrocious pun about Tcl being
-# "Enterprise ready."  Now we're stuck with it.
+# "Enterprise ready."  Now we're stock with it.
 #
 #----------------------------------------------------------------------
 

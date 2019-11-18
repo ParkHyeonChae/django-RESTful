@@ -16,12 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from user.views import index, RegisterView, LoginView
-from product.views import ProductList
+from product.views import ProductList, ProductCreate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('register/', RegisterView.as_view()), # class일 경우 as_view() 함수 추가
     path('login/', LoginView.as_view()),
-    path('product/', ProductList.as_view())
+    path('product/', ProductList.as_view()),
+    path('product/create/', ProductCreate.as_view()),
+
  ]
