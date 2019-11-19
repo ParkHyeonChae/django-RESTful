@@ -25,5 +25,5 @@ urlpatterns = [
     path('login/', LoginView.as_view()),
     path('product/', ProductList.as_view()),
     path('product/create/', ProductCreate.as_view()),
-
  ]
+
