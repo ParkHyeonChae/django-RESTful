@@ -5,6 +5,8 @@ import sys
 
 
 def main():
+    locA = 3
+    locC = 2
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_restful.settings')
     try:
         from django.core.management import execute_from_command_line
