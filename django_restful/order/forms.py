@@ -2,6 +2,7 @@ from django import forms
 from .models import Order
 from product.models import Product
 from user.models import User
+from django.db import transaction # transaction : 일련의 동작을 하나의 동작으로 처리, 전체가 다 성공하면 성공, 하나라도 실패하면 롤백 (주문시 제고도 감소)
 
 class RegisterForm(forms.Form):
     def __init__(self, request, *args, **kwargs): # request를 전달할 수 있게 생성자 함수 생성
@@ -27,15 +28,19 @@ class RegisterForm(forms.Form):
         user = self.request.session.get('user')
 
         if quantity and product and user:
-            order = Order(
-                quantity=quantity,
-                product=Product.objects.get(pk=product),
-                user=User.objects.get(email=user)
-            )
-            order.save()
+            with transaction.atomic():
+                prod = Product.objects.get(pk=product)
+                order = Order(
+                    quantity=quantity,
+                    product=prod,
+                    user=User.objects.get(email=user)
+                )
+                order.save()
+                prod.stock -=quantity
+                prod.save()
         else:
             self.product = product
             self.add_error('quantity', '값이 없습니다.')
             self.add_error('product', '값이 없습니다.')
 
-        #print(self.request.session) # 사용자 세션 접근
+        # print(self.request.session) # 사용자 세션 접근
