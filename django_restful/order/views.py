@@ -10,7 +10,7 @@ from .models import Order
 class OrderCreate(FormView):
     form_class = RegisterForm
     success_url = '/product/'
-
+    
     def form_invalid(self, form):
         return redirect('/product/' + str(form.product))
 

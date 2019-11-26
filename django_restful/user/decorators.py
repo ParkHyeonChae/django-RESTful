@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from .models import User
 
-def login_required(function):
+def login_required(function): # 로그인 안할시 order page 접근 불가
     def wrap(request, *args, **kwargs):
         user = request.session.get('user')
 
@@ -11,7 +11,7 @@ def login_required(function):
 
     return wrap
 
-def admin_required(function):
+def admin_required(function): # 관리자 아닐시 product create 불가
     def wrap(request, *args, **kwargs):
         user = request.session.get('user')
 

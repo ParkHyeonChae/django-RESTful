@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.hashers import check_password
 from .models import User
 
 class RegisterForm(forms.Form):
@@ -34,15 +34,9 @@ class RegisterForm(forms.Form):
                 if password != re_password:
                     self.add_error('password', '비밀번호가 서로 다릅니다.')
                     self.add_error('re_password', '비밀번호가 서로 다릅니다.')
-                else:
-                    user = User(
-                        email=email,
-                        password=make_password(password)
-                    )
-                    user.save()
             else:
-                self.add_error('email', '이미 존재하는 계정입니다.')      
-
+                self.add_error('email', '이미 존재하는 계정입니다.')
+                
 class LoginForm(forms.Form):
     email = forms.EmailField(
         error_messages={
@@ -71,5 +65,3 @@ class LoginForm(forms.Form):
             
             if not check_password(password, user.password):
                 self.add_error('password', '비밀번호가 틀렸습니다.')
-            else:
-                self.email = user.email
