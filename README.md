@@ -30,3 +30,9 @@ django-admin startapp order
 ```
 python manage.py createsuperuser
 ```
+
+### 4. DRF 설치
+```
+pip install djangorestframework
+INSTALLED_APPS 'rest_framework' 추가
+```
