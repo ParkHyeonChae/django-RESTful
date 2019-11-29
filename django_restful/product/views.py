@@ -19,6 +19,15 @@ class ProductListAPI(generics.GenericAPIView, mixins.ListModelMixin):
     def get(self, request,*args, **kwargs):
         return self.list(request, *args, **kwargs)
 
+class ProductDetailAPI(generics.GenericAPIView, mixins.RetrieveModelMixin): # 상세보기를 위한 mixins
+    serializer_class = ProductSerializer
+
+    def get_queryset(self): # url에서 pk값을 설정해주어야 됨
+        return Product.objects.all().order_by('id')
+
+    def get(self, request,*args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
 class ProductList(ListView):
     model = Product
     template_name = 'product.html'
